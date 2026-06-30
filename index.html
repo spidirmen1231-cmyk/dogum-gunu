@@ -86,7 +86,6 @@
             min-height: 24px;
         }
         
-        /* Büyük Final Alanı */
         #celebration-area {
             display: none;
             animation: fadeIn 1s ease-in-out;
@@ -96,7 +95,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* GERÇEK CSS PASTA TASARIMI 🎂 */
         .cake {
             position: relative;
             width: 180px;
@@ -110,20 +108,20 @@
             box-shadow: 0px 4px 0px #e6c280;
         }
         .layer-bottom {
-            background: #f4d068; /* Kek tabanı */
+            background: #f4d068;
             width: 180px;
             height: 40px;
             bottom: 0;
         }
         .layer-middle {
-            background: #ff758c; /* Çilekli krema katı */
+            background: #ff758c;
             width: 160px;
             height: 40px;
             bottom: 40px;
             left: 10px;
         }
         .layer-top {
-            background: #ffffff; /* Beyaz krema üstü */
+            background: #ffffff;
             width: 140px;
             height: 40px;
             bottom: 80px;
@@ -134,7 +132,7 @@
             color: #ff4b78;
             font-size: 14px;
             font-weight: bold;
-            border-radius: 10px 10px 10px 10px;
+            border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         .candle {
@@ -148,7 +146,6 @@
         }
         .flame {
             position: absolute;
-            background: #orange;
             background: radial-gradient(#ffea00, #ff5722);
             width: 12px;
             height: 18px;
@@ -162,7 +159,6 @@
             100% { transform: scale(1.1) rotate(2deg); }
         }
 
-        /* Alt Yazılar */
         .hoca-title {
             font-size: 24px;
             font-weight: bold;
@@ -212,8 +208,7 @@
         </div>
 
         <div class="message-box">
-            🌟 Öğrettiğiniz en iyi dersler için teşekkür ederiz !! 🌟<br>
-            <i>"Yapmak için çok uğraştım. Umarım seversiniz! :D"</i>
+            🌟 Öğrettiğiniz en iyi dersler için teşekkür ederiz !! 🌟
         </div>
 
         <div class="credits">
@@ -252,15 +247,12 @@ function kontrolEt() {
         return;
     }
 
-    // Dinamik isimleri yerleştirme
     document.getElementById('hocaAd').innerText = hocaIsim.toUpperCase() + " HOCAM";
     document.getElementById('pastaIsim').innerText = hocaIsim.toUpperCase();
 
-    // Ekran değiştirme
     loginArea.style.display = "none";
     celebrationArea.style.display = "block";
 
-    // Muazzam konfeti şovu
     konfetiPatlat();
 }
 </script>
