@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doğum Gününüz Kutlu Olsun Hocam! 🎂</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        #card {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(255, 75, 120, 0.15);
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        h2 {
+            color: #ff4b78;
+            margin-bottom: 15px;
+            font-size: 26px;
+        }
+        p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+        .input-group {
+            margin: 20px 0;
+        }
+        input {
+            padding: 14px 25px;
+            width: 85%;
+            max-width: 320px;
+            border: 2px solid #ffe5ec;
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+            text-align: center;
+            background-color: #fff5f7;
+            color: #ff4b78;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        input:focus {
+            border-color: #ff4b78;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(255, 75, 120, 0.2);
+        }
+        button {
+            background: linear-gradient(to right, #ff4b78, #ff758c);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(255, 75, 120, 0.3);
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 75, 120, 0.4);
+        }
+        #error-msg {
+            color: #ff3366;
+            font-weight: bold;
+            margin-top: 15px;
+            min-height: 24px;
+        }
+        
+        /* Büyük Final Alanı */
+        #celebration-area {
+            display: none;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* GERÇEK CSS PASTA TASARIMI 🎂 */
+        .cake {
+            position: relative;
+            width: 180px;
+            height: 120px;
+            margin: 40px auto 30px auto;
+        }
+        .layer {
+            position: absolute;
+            display: block;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0px 4px 0px #e6c280;
+        }
+        .layer-bottom {
+            background: #f4d068; /* Kek tabanı */
+            width: 180px;
+            height: 40px;
+            bottom: 0;
+        }
+        .layer-middle {
+            background: #ff758c; /* Çilekli krema katı */
+            width: 160px;
+            height: 40px;
+            bottom: 40px;
+            left: 10px;
+        }
+        .layer-top {
+            background: #ffffff; /* Beyaz krema üstü */
+            width: 140px;
+            height: 40px;
+            bottom: 80px;
+            left: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ff4b78;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .candle {
+            position: absolute;
+            background: #3498db;
+            width: 8px;
+            height: 30px;
+            top: -25px;
+            left: 86px;
+            border-radius: 4px;
+        }
+        .flame {
+            position: absolute;
+            background: #orange;
+            background: radial-gradient(#ffea00, #ff5722);
+            width: 12px;
+            height: 18px;
+            border-radius: 50% 50% 20% 20%;
+            top: -15px;
+            left: -2px;
+            animation: flicker 0.1s ease-in-out infinite alternate;
+        }
+        @keyframes flicker {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        /* Alt Yazılar */
+        .hoca-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4b78;
+            margin-bottom: 10px;
+        }
+        .message-box {
+            background: #fff5f7;
+            padding: 20px;
+            border-radius: 15px;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-top: 15px;
+            border-bottom: 4px solid #ff4b78;
+        }
+        .credits {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 20px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+<div id="card">
+    <div id="login-area">
+        <h2>🎉 Sürpriz Protokolü</h2>
+        <p>Devam etmek için lütfen isminizi girin hocam :D</p>
+        <div class="input-group">
+            <input type="text" id="hocaInput" placeholder="İsminiz..." autocomplete="off">
+        </div>
+        <button onclick="kontrolEt()">Giriş Yap</button>
+        <div id="error-msg"></div>
+    </div>
+
+    <div id="celebration-area">
+        <div class="hoca-title" id="hocaAd">SELMA HOCAM</div>
+        <h2>DOGUM GUNUNUZ KUTLU OLSUN!!! 🥳🎈</h2>
+        
+        <div class="cake">
+            <div class="candle"><div class="flame"></div></div>
+            <div class="layer layer-top" id="pastaIsim">SELMA</div>
+            <div class="layer layer-middle"></div>
+            <div class="layer layer-bottom"></div>
+        </div>
+
+        <div class="message-box">
+            🌟 Öğrettiğiniz en iyi dersler için teşekkür ederiz !! 🌟<br>
+            <i>"Yapmak için çok uğraştım ama sanırım input ne biliyorum :D"</i>
+        </div>
+
+        <div class="credits">
+            Made By: Utku Kağan DAĞ<br>
+            Time: Tuesday, June 30, 2026 21:01
+        </div>
+    </div>
+</div>
+
+<script>
+function konfetiPatlat() {
+    var end = Date.now() + (4 * 1000);
+    (function frame() {
+        confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0 } });
+        confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1 } });
+        if (Date.now() < end) { requestAnimationFrame(frame); }
+    }());
+}
+
+function kontrolEt() {
+    let inputField = document.getElementById('hocaInput');
+    let errorField = document.getElementById('error-msg');
+    let hocaIsim = inputField.value.trim();
+    let loginArea = document.getElementById('login-area');
+    let celebrationArea = document.getElementById('celebration-area');
+
+    errorField.innerText = "";
+
+    if (hocaIsim === "") {
+        errorField.innerText = "❌ Hocan boş girilmez çok ayıp :(";
+        return;
+    }
+
+    if (/\d/.test(hocaIsim)) {
+        errorField.innerText = "❌ Hocan hata var tekrar deneyin lütfen. (Sayı girmeyin :D)";
+        return;
+    }
+
+    // Dinamik isimleri yerleştirme
+    document.getElementById('hocaAd').innerText = hocaIsim.toUpperCase() + " HOCAM";
+    document.getElementById('pastaIsim').innerText = hocaIsim.toUpperCase();
+
+    // Ekran değiştirme
+    loginArea.style.display = "none";
+    celebrationArea.style.display = "block";
+
+    // Muazzam konfeti şovu
+    konfetiPatlat();
+}
+</script>
+
+</body>
+</html>
